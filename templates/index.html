@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Stones - Indian Temple Architecture & Sculptures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="temple" patternUnits="userSpaceOnUse" width="20" height="20"><path d="M10 2L18 10L10 18L2 10z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23temple)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px var(--primary-gold); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px var(--primary-gold), 0 0 30px var(--primary-gold); }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, var(--dark-charcoal) 0%, var(--rich-maroon) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-gold) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: slideInFromBottom 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInFromBottom {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            animation: slideInFromBottom 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px var(--shadow-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 80px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-saffron), var(--deep-orange));
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-saffron));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10L90 90H10z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .blog-content {
+            padding: 30px;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            color: var(--rich-maroon);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            background: linear-gradient(45deg, var(--deep-orange), var(--secondary-saffron));
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .read-more:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* No Blogs Message */
+        .no-blogs-message {
+            text-align: center;
+            padding: 80px 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            grid-column: 1 / -1;
+        }
+
+        .om-symbol-large {
+            font-size: 4rem;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .no-blogs-message h2 {
+            color: var(--rich-maroon);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .no-blogs-message p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .no-blogs-message .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .no-blogs-message .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h3 {
+            color: var(--rich-maroon);
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            border-bottom: 3px solid var(--primary-gold);
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar li:hover {
+            padding-left: 10px;
+            color: var(--deep-orange);
+        }
+
+        .sidebar a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        /* Two Column Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-charcoal);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 40px 0;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .blog-card {
+                margin-bottom: 20px;
+            }
+
+            .blog-content {
+                padding: 20px;
+            }
+
+            .blog-title {
+                font-size: 1.3rem;
+            }
+
+            .sidebar {
+                padding: 25px;
+                position: static;
+            }
+
+            .search-box {
+                margin-bottom: 25px;
+            }
+
+            .search-input {
+                padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 40px 0 20px;
+                margin-top: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .blog-content {
+                padding: 15px;
+            }
+
+            .blog-title {
+                font-size: 1.2rem;
+            }
+
+            .sidebar {
+                padding: 20px;
+            }
+
+            .search-input {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Animation for cards on scroll */
+        .blog-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--secondary-saffron), var(--deep-orange));
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Ancient Stones</div>
+                <nav>
+                    <ul>
+                                <li><a href="/architecture">Architecture</a></li>
+        <li><a href="/sculpture">Sculptures</a></li>
+        <li><a href="/sciences">Sciences</a></li>
+        <li><a href="/blogs">Read Blogs</a></li>
+        <li><a href="/admin">Admin</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ancient Stones</h1>
+                <p>Explore the magnificent world of Indian temple architecture and sculptures through detailed insights, historical context, and artistic analysis</p>
+                <a href="/blog" class="cta-button">Discover the Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="main-content">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Search temples, sculptures, architectural styles..." id="searchInput">
+                    </div>
+
+                    <div class="blog-grid" id="blogGrid">
+                        <div class="no-blogs-message">
+                            <div class="om-symbol-large">ॐ</div>
+                            <h2>Welcome to Sacred Stones</h2>
+                            <p>Your journey into the world of Indian temple architecture and sculptures begins here.</p>
+                            <p>No blog posts have been published yet. When you create your first blog post, it will appear here.</p>
+                            <a href="/blog" class="cta-button">Write Your First Blog →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3>Popular Categories</h3>
+                        <ul>
+                            <li><a href="#" onclick="filterByCategory('dravidian')">Dravidian Architecture</a></li>
+                            <li><a href="#" onclick="filterByCategory('nagara')">Nagara Style Temples</a></li>
+                            <li><a href="#" onclick="filterByCategory('vesara')">Vesara Architecture</a></li>
+                            <li><a href="#" onclick="filterByCategory('rock-cut')">Rock-cut Temples</a></li>
+                            <li><a href="#" onclick="filterByCategory('sculptures')">Temple Sculptures</a></li>
+                            <li><a href="#" onclick="filterByCategory('iconography')">Religious Iconography</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Featured Temples</h3>
+                        <ul>
+                            <li><a href="#" onclick="filterByTemple('brihadeeswarar')">Brihadeeswarar Temple</a></li>
+                            <li><a href="#" onclick="filterByTemple('konark')">Konark Sun Temple</a></li>
+                            <li><a href="#" onclick="filterByTemple('meenakshi')">Meenakshi Temple</a></li>
+                            <li><a href="#" onclick="filterByTemple('ellora')">Ellora Caves</a></li>
+                            <li><a href="#" onclick="filterByTemple('hampi')">Hampi Temples</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Quick Actions</h3>
+                        <ul>
+                            <li><a href="/blog">Write New Blog Post</a></li>
+                            <li><a href="/architecture">Browse Architecture</a></li>
+                            <li><a href="/sculpture">Explore Sculptures</a></li>
+                            <li><a href="/admin">View Analytics</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Ancient Stones</h4>
+                    <p>Dedicated to preserving and sharing the rich heritage of Indian temple architecture and sculptural art through detailed research and beautiful storytelling.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#blogs">All Blogs</a></p>
+                    <p><a href="#subscribe">Subscribe</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Topics</h4>
+                    <p><a href="#architecture">Temple Architecture</a></p>
+                    <p><a href="#sculptures">Stone Sculptures</a></p>
+                    <p><a href="#history">Historical Context</a></p>
+                    <p><a href="#conservation">Conservation</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p><a href="#newsletter">Newsletter</a></p>
+                    <p><a href="#social">Social Media</a></p>
+                    <p><a href="#community">Community</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ancient Stones. Preserving India's architectural heritage through digital storytelling.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const blogGrid = document.getElementById('blogGrid');
+        const blogCards = Array.from(blogGrid.children);
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Category and Temple Filter Functions
+        function filterByCategory(category) {
+            // In a real implementation, this would filter blogs by category
+            alert(`Filtering by category: ${category}\n\nWhen you create blog posts with categories, clicking these links will filter and show only blogs in that category.`);
+        }
+
+        function filterByTemple(temple) {
+            // In a real implementation, this would filter blogs by temple
+            alert(`Filtering by temple: ${temple}\n\nWhen you create blog posts about specific temples, clicking these links will filter and show only blogs about that temple.`);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all blog cards
+        blogCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add floating particle effect on hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: var(--primary-gold);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.7;
+                animation: floatUp 6s linear infinite;
+            `;
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            
+            document.querySelector('.hero').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add CSS for floating particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.7;
+                }
+                90% {
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

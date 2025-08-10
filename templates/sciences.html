@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Indian Sciences - Sacred Stones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+            --science-blue: #2E86AB;
+            --math-purple: #A23B72;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-active {
+            color: var(--primary-gold) !important;
+        }
+
+        .nav-active::after {
+            width: 100% !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(45deg, var(--dark-charcoal) 0%, var(--science-blue) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--science-blue);
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Science Categories Grid */
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .science-category {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-gold);
+        }
+
+        .science-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--rich-maroon);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .category-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .category-topics {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-topics li {
+            padding: 8px 0;
+            color: var(--dark-charcoal);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .category-topics li::before {
+            content: '🔬';
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-title {
+            font-size: 2.5rem;
+            color: var(--math-purple);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--science-blue));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: 50px;
+        }
+
+        .timeline-content {
+            background: var(--soft-gray);
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid var(--soft-gray);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-right: 15px solid var(--soft-gray);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-gold);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--rich-maroon);
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary-gold);
+        }
+
+        /* Featured Scientists */
+        .scientists-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .scientists-title {
+            font-size: 2.5rem;
+            color: var(--rich-maroon);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .scientists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .scientist-card {
+            background: var(--soft-gray);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-gold);
+        }
+
+        .scientist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .scientist-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--science-blue));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .scientist-name {
+            font-size: 1.4rem;
+            color: var(--rich-maroon);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .scientist-period {
+            color: var(--primary-gold);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .scientist-contributions {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(45deg, var(--science-blue), var(--math-purple));
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: var(--secondary-saffron);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .science-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                text-align: left;
+                padding-left: 50px;
+                padding-right: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -15px;
+                right: auto;
+                border-right: 15px solid var(--soft-gray);
+                border-left: none;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: none;
+            }
+
+            .scientists-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section,
+            .timeline-section,
+            .scientists-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-gold), var(--science-blue));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--science-blue), var(--math-purple));
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+
+            .hero-section {
+                padding: 40px 0;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .science-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .science-category {
+                padding: 25px;
+            }
+
+            .category-title {
+                font-size: 1.5rem;
+            }
+
+            .category-description {
+                font-size: 0.95rem;
+            }
+
+            .category-topics li {
+                font-size: 0.9rem;
+                padding: 6px 0;
+            }
+
+            .timeline {
+                padding: 40px 0;
+            }
+
+            .timeline-title {
+                font-size: 2.2rem;
+            }
+
+            .timeline-item {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .timeline-date {
+                font-size: 1.1rem;
+            }
+
+            .timeline-content h4 {
+                font-size: 1.3rem;
+            }
+
+            .timeline-content p {
+                font-size: 0.9rem;
+            }
+
+            .scientists-section {
+                padding: 40px 0;
+            }
+
+            .scientists-title {
+                font-size: 2.2rem;
+            }
+
+            .scientists-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .scientist-card {
+                padding: 20px;
+            }
+
+            .scientist-name {
+                font-size: 1.4rem;
+            }
+
+            .scientist-era {
+                font-size: 1rem;
+            }
+
+            .scientist-description {
+                font-size: 0.9rem;
+            }
+
+            .cta-section {
+                padding: 40px 0;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-description {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .science-category {
+                padding: 20px;
+            }
+
+            .category-title {
+                font-size: 1.3rem;
+            }
+
+            .category-description {
+                font-size: 0.9rem;
+            }
+
+            .category-topics li {
+                font-size: 0.85rem;
+                padding: 5px 0;
+            }
+
+            .timeline-title {
+                font-size: 1.8rem;
+            }
+
+            .timeline-item {
+                padding: 15px;
+            }
+
+            .timeline-date {
+                font-size: 1rem;
+            }
+
+            .timeline-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .timeline-content p {
+                font-size: 0.85rem;
+            }
+
+            .scientists-title {
+                font-size: 1.8rem;
+            }
+
+            .scientist-card {
+                padding: 15px;
+            }
+
+            .scientist-name {
+                font-size: 1.3rem;
+            }
+
+            .scientist-era {
+                font-size: 0.95rem;
+            }
+
+            .scientist-description {
+                font-size: 0.85rem;
+            }
+
+            .cta-title {
+                font-size: 1.6rem;
+            }
+
+            .cta-description {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Sacred Stones</a>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/architecture">Architecture</a></li>
+                        <li><a href="/sculpture">Sculptures</a></li>
+                        <li><a href="/sciences" class="nav-active">Sciences</a></li>
+                        <li><a href="/blogs">Read Blogs</a></li>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Ancient Indian Sciences</h1>
+            <p class="page-subtitle">Discover the remarkable mathematical genius, astronomical insights, and scientific discoveries that shaped the ancient world. From the concept of zero to advanced calculus, India's scientific heritage continues to inspire modern innovation.</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h2 class="hero-title">The Cradle of Scientific Innovation</h2>
+                <p class="hero-description">
+                    Ancient India was a powerhouse of scientific thought and mathematical innovation. Long before the modern era, 
+                    Indian scholars were developing sophisticated mathematical systems, astronomical calculations, and scientific 
+                    principles that would influence the entire world. From the revolutionary concept of zero to complex astronomical 
+                    calculations, India's scientific heritage represents one of humanity's greatest intellectual achievements.
+                </p>
+            </section>
+
+            <!-- Science Categories Grid -->
+            <section class="science-grid">
+                <div class="science-category">
+                    <span class="category-icon">🔢</span>
+                    <h3 class="category-title">Mathematics</h3>
+                    <p class="category-description">
+                        The foundation of modern mathematics was laid in ancient India, with groundbreaking discoveries that revolutionized numerical systems and mathematical thinking.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Concept of Zero and Place Value System</li>
+                        <li>Decimal Number System</li>
+                        <li>Algebra and Quadratic Equations</li>
+                        <li>Trigonometry and Sine Tables</li>
+                        <li>Calculus Concepts (Madhava Series)</li>
+                        <li>Fibonacci Sequence Origins</li>
+                        <li>Pascal's Triangle (Meru Prastara)</li>
+                        <li>Vedic Mathematics Techniques</li>
+                    </ul>
+                </div>
+
+                <div class="science-category">
+                    <span class="category-icon">🌌</span>
+                    <h3 class="category-title">Astronomy</h3>
+                    <p class="category-description">
+                        Ancient Indian astronomers achieved remarkable precision in celestial calculations, developing sophisticated models of the cosmos and planetary movements.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Heliocentric Model (Aryabhata)</li>
+                        <li>Precise Planetary Calculations</li>
+                        <li>Solar and Lunar Eclipse Predictions</li>
+                        <li>Star Catalogues and Constellations</li>
+                        <li>Astronomical Instruments (Yantras)</li>
+                        <li>Cosmological Theories</li>
+                        <li>Time Measurement Systems</li>
+                        <li>Calendar Calculations</li>
+                    </ul>
+                </div>
+
+                <div class="science-category">
+                    <span class="category-icon">🧪</span>
+                    <h3 class="category-title">Chemistry & Metallurgy</h3>
+                    <p class="category-description">
+                        India's ancient chemists and metallurgists developed advanced techniques for metal extraction, alloy creation, and chemical processes.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Iron Pillar of Delhi (Rust-resistant)</li>
+                        <li>Wootz Steel Production</li>
+                        <li>Zinc Extraction Techniques</li>
+                        <li>Dye and Pigment Chemistry</li>
+                        <li>Glass and Ceramic Technology</li>
+                        <li>Medicinal Chemistry (Ayurveda)</li>
+                        <li>Alchemical Processes</li>
+                        <li>Textile Dyeing Methods</li>
+                    </ul>
+                </div>
+
+                <div class="science-category">
+                    <span class="category-icon">🏥</span>
+                    <h3 class="category-title">Medicine & Biology</h3>
+                    <p class="category-description">
+                        Ayurveda and ancient Indian medicine represent one of the world's oldest and most comprehensive medical systems.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Ayurvedic Medicine Principles</li>
+                        <li>Surgical Techniques (Sushruta)</li>
+                        <li>Anatomical Knowledge</li>
+                        <li>Herbal Medicine Systems</li>
+                        <li>Disease Classification</li>
+                        <li>Preventive Healthcare</li>
+                        <li>Yoga and Physiology</li>
+                        <li>Mental Health Approaches</li>
+                    </ul>
+                </div>
+
+                <div class="science-category">
+                    <span class="category-icon">⚡</span>
+                    <h3 class="category-title">Physics & Engineering</h3>
+                    <p class="category-description">
+                        Ancient Indian scientists understood fundamental physical principles and applied them to create remarkable engineering marvels.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Wave Theory of Sound</li>
+                        <li>Optics and Light Properties</li>
+                        <li>Mechanical Engineering</li>
+                        <li>Architectural Acoustics</li>
+                        <li>Water Management Systems</li>
+                        <li>Energy Conservation Concepts</li>
+                        <li>Material Science</li>
+                        <li>Structural Engineering</li>
+                    </ul>
+                </div>
+
+                <div class="science-category">
+                    <span class="category-icon">🌱</span>
+                    <h3 class="category-title">Agriculture & Botany</h3>
+                    <p class="category-description">
+                        India's agricultural scientists developed sophisticated farming techniques and botanical knowledge that sustained civilizations.
+                    </p>
+                    <ul class="category-topics">
+                        <li>Crop Rotation Systems</li>
+                        <li>Soil Science and Fertility</li>
+                        <li>Plant Classification</li>
+                        <li>Irrigation Technologies</li>
+                        <li>Seed Selection Methods</li>
+                        <li>Organic Farming Principles</li>
+                        <li>Medicinal Plant Knowledge</li>
+                        <li>Sustainable Agriculture</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Historical Timeline -->
+            <section class="timeline-section">
+                <h2 class="timeline-title">Scientific Timeline of Ancient India</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">3000-1500 BCE</div>
+                            <h3 class="timeline-title">Indus Valley Civilization</h3>
+                            <p class="timeline-description">
+                                Advanced urban planning, sophisticated drainage systems, standardized weights and measures, 
+                                and early mathematical concepts including decimal system precursors.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1500-500 BCE</div>
+                            <h3 class="timeline-title">Vedic Period</h3>
+                            <p class="timeline-description">
+                                Development of Vedic mathematics, astronomical observations, geometric principles, 
+                                and the foundation of Ayurvedic medicine in sacred texts.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">500 BCE - 200 CE</div>
+                            <h3 class="timeline-title">Classical Period</h3>
+                            <p class="timeline-description">
+                                Sushruta's surgical techniques, Panini's linguistic science, and the development 
+                                of sophisticated mathematical notation systems.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">200-600 CE</div>
+                            <h3 class="timeline-title">Gupta Golden Age</h3>
+                            <p class="timeline-description">
+                                Aryabhata's revolutionary astronomical and mathematical discoveries, including 
+                                the concept of zero, decimal system, and heliocentric model.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">600-1200 CE</div>
+                            <h3 class="timeline-title">Medieval Period</h3>
+                            <p class="timeline-description">
+                                Brahmagupta's advanced algebra, Bhaskara's calculus concepts, and the spread 
+                                of Indian mathematical knowledge to the Islamic world and Europe.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1200-1600 CE</div>
+                            <h3 class="timeline-title">Late Classical Period</h3>
+                            <p class="timeline-description">
+                                Madhava's infinite series for π, Nilakantha's astronomical models, and 
+                                the culmination of classical Indian mathematical and scientific thought.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Scientists -->
+            <section class="scientists-section">
+                <h2 class="scientists-title">Legendary Scientists & Mathematicians</h2>
+                <div class="scientists-grid">
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">आ</div>
+                        <h3 class="scientist-name">Aryabhata</h3>
+                        <div class="scientist-period">476-550 CE</div>
+                        <p class="scientist-contributions">
+                            Introduced the concept of zero, decimal system, and heliocentric model. 
+                            Calculated π to 4 decimal places and developed trigonometric functions.
+                        </p>
+                    </div>
+
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">ब</div>
+                        <h3 class="scientist-name">Brahmagupta</h3>
+                        <div class="scientist-period">598-668 CE</div>
+                        <p class="scientist-contributions">
+                            Advanced algebra, quadratic equations, and arithmetic operations with zero. 
+                            Developed rules for positive and negative numbers.
+                        </p>
+                    </div>
+
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">भ</div>
+                        <h3 class="scientist-name">Bhaskara II</h3>
+                        <div class="scientist-period">1114-1185 CE</div>
+                        <p class="scientist-contributions">
+                            Calculus concepts, differential calculus, and infinite series. 
+                            Advanced solutions to mathematical problems and astronomical calculations.
+                        </p>
+                    </div>
+
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">सु</div>
+                        <h3 class="scientist-name">Sushruta</h3>
+                        <div class="scientist-period">600 BCE</div>
+                        <p class="scientist-contributions">
+                            Father of surgery, described 300 surgical procedures and 120 surgical instruments. 
+                            Advanced knowledge of human anatomy and medical techniques.
+                        </p>
+                    </div>
+
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">म</div>
+                        <h3 class="scientist-name">Madhava</h3>
+                        <div class="scientist-period">1340-1425 CE</div>
+                        <p class="scientist-contributions">
+                            Infinite series for π, power series, and early calculus. 
+                            Founded the Kerala school of mathematics and astronomy.
+                        </p>
+                    </div>
+
+                    <div class="scientist-card">
+                        <div class="scientist-avatar">प</div>
+                        <h3 class="scientist-name">Panini</h3>
+                        <div class="scientist-period">500 BCE</div>
+                        <p class="scientist-contributions">
+                            Father of linguistics, created comprehensive Sanskrit grammar. 
+                            Developed mathematical notation and formal language theory.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="cta-section">
+                <h2 class="cta-title">Explore Ancient Indian Sciences</h2>
+                <p class="cta-description">
+                    Dive deeper into the fascinating world of ancient Indian scientific discoveries. 
+                    Read blogs about mathematical concepts, astronomical achievements, or medical innovations 
+                    that continue to influence modern science.
+                </p>
+                <a href="/blogs" class="cta-button">Read About Sciences 📚</a>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll for timeline items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+
+        // Add hover effects for science categories
+        document.querySelectorAll('.science-category').forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                this.style.borderLeftColor = var(--science-blue);
+            });
+            
+            category.addEventListener('mouseleave', function() {
+                this.style.borderLeftColor = var(--primary-gold);
+            });
+        });
+    </script>
+</body>
+</html>

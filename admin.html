@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Sacred Stones Analytics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --success-green: #28a745;
+            --info-blue: #17a2b8;
+            --warning-orange: #ffc107;
+            --danger-red: #dc3545;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background: var(--primary-gold);
+            color: var(--dark-charcoal);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--rich-maroon);
+            font-weight: 500;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .stat-change.positive {
+            color: var(--success-green);
+        }
+
+        .stat-change.negative {
+            color: var(--danger-red);
+        }
+
+        /* Real-time Indicator */
+        .realtime-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--success-green);
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--rich-maroon);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-title .realtime-indicator {
+            margin-left: auto;
+        }
+
+        /* Page Views Chart */
+        .page-views-chart {
+            height: 300px;
+            display: flex;
+            align-items: end;
+            gap: 10px;
+            padding: 20px 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary-gold), var(--secondary-saffron));
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            min-height: 20px;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--dark-charcoal);
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--rich-maroon);
+        }
+
+        /* Recent Activity */
+        .activity-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .activity-icon.page-view {
+            background: linear-gradient(45deg, var(--info-blue), #6f42c1);
+            color: white;
+        }
+
+        .activity-icon.new-post {
+            background: linear-gradient(45deg, var(--success-green), #20c997);
+            color: white;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: bold;
+            color: var(--dark-charcoal);
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Blog Management */
+        .blog-management {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--rich-maroon);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .blog-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .blog-table th,
+        .blog-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .blog-table th {
+            background: var(--soft-gray);
+            font-weight: bold;
+            color: var(--rich-maroon);
+        }
+
+        .blog-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-published {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .status-draft {
+            background: var(--warning-orange);
+            color: var(--dark-charcoal);
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .btn-edit {
+            background: var(--info-blue);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Sacred Stones Analytics</div>
+                <nav class="nav-links">
+                    <a href="/" class="active">Dashboard</a>
+                    <a href="/blog">Write Blog</a>
+                    <a href="/architecture">Architecture</a>
+                    <a href="/sculpture">Sculptures</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Real-time Stats Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalViews">-</div>
+                <div class="stat-label">Total Page Views (30 days)</div>
+                <div class="stat-change positive" id="viewsChange">+12% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueVisitors">-</div>
+                <div class="stat-label">Unique Visitors (30 days)</div>
+                <div class="stat-change positive" id="visitorsChange">+8% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="onlineUsers">-</div>
+                <div class="stat-label">Currently Online</div>
+                <div class="stat-change">
+                    <span class="realtime-indicator"></span>
+                    Live
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="blogPosts">-</div>
+                <div class="stat-label">Total Blog Posts</div>
+                <div class="stat-change positive" id="postsChange">+3 this week</div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-container">
+                <div class="chart-title">
+                    Page Views by Page (Last 30 Days)
+                    <span class="realtime-indicator"></span>
+                </div>
+                <div class="page-views-chart" id="pageViewsChart">
+                    <!-- Chart bars will be generated here -->
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">
+                    Recent Activity
+                    <span class="realtime-indicator"></span>
+                </div>
+                <div class="activity-list" id="activityList">
+                    <!-- Activity items will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Management -->
+        <div class="blog-management">
+            <div class="section-title">
+                Blog Management
+                <a href="/blog" class="btn btn-primary">➕ Create New Blog</a>
+            </div>
+            <table class="blog-table" id="blogTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="blogTableBody">
+                    <!-- Blog rows will be generated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let analyticsData = {};
+        let updateInterval;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnalyticsData();
+            loadBlogData();
+            
+            // Update data every 30 seconds
+            updateInterval = setInterval(() => {
+                loadAnalyticsData();
+                loadBlogData();
+            }, 30000);
+        });
+
+        // Load analytics data
+        async function loadAnalyticsData() {
+            try {
+                const [overview, realtime] = await Promise.all([
+                    fetch('/api/analytics/overview').then(res => res.json()),
+                    fetch('/api/analytics/realtime').then(res => res.json())
+                ]);
+
+                analyticsData = { ...overview, ...realtime };
+                updateDashboard();
+                updatePageViewsChart();
+                updateActivityList();
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+            }
+        }
+
+        // Update dashboard stats
+        function updateDashboard() {
+            document.getElementById('totalViews').textContent = formatNumber(analyticsData.total_views || 0);
+            document.getElementById('uniqueVisitors').textContent = formatNumber(analyticsData.unique_visitors || 0);
+            document.getElementById('onlineUsers').textContent = formatNumber(analyticsData.online_users || 0);
+            document.getElementById('blogPosts').textContent = formatNumber(analyticsData.blog_posts || 0);
+        }
+
+        // Update page views chart
+        function updatePageViewsChart() {
+            const chartContainer = document.getElementById('pageViewsChart');
+            const pageStats = analyticsData.page_stats || {};
+            
+            // Find max value for scaling
+            const maxViews = Math.max(...Object.values(pageStats), 1);
+            
+            chartContainer.innerHTML = '';
+            
+            Object.entries(pageStats).forEach(([page, views]) => {
+                const barHeight = (views / maxViews) * 100;
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.height = `${barHeight}%`;
+                
+                const barValue = document.createElement('div');
+                barValue.className = 'bar-value';
+                barValue.textContent = formatNumber(views);
+                
+                const barLabel = document.createElement('div');
+                barLabel.className = 'bar-label';
+                barLabel.textContent = page.charAt(0).toUpperCase() + page.slice(1);
+                
+                bar.appendChild(barValue);
+                bar.appendChild(barLabel);
+                chartContainer.appendChild(bar);
+            });
+        }
+
+        // Update activity list
+        function updateActivityList() {
+            const activityList = document.getElementById('activityList');
+            const pageStats = analyticsData.page_stats || {};
+            
+            // Create activity items from page stats
+            const activities = Object.entries(pageStats)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 5)
+                .map(([page, views]) => ({
+                    type: 'page-view',
+                    title: `${formatNumber(views)} views on ${page.charAt(0).toUpperCase() + page.slice(1)} page`,
+                    time: 'Recently'
+                }));
+            
+            activityList.innerHTML = '';
+            activities.forEach(activity => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                
+                item.innerHTML = `
+                    <div class="activity-icon ${activity.type}">
+                        ${activity.type === 'page-view' ? '👁️' : '📝'}
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.title}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                `;
+                
+                activityList.appendChild(item);
+            });
+        }
+
+        // Load blog data
+        async function loadBlogData() {
+            try {
+                const blogs = await fetch('/api/blogs').then(res => res.json());
+                updateBlogTable(blogs);
+            } catch (error) {
+                console.error('Error loading blogs:', error);
+            }
+        }
+
+        // Update blog table
+        function updateBlogTable(blogs) {
+            const tbody = document.getElementById('blogTableBody');
+            tbody.innerHTML = '';
+            
+            blogs.forEach(blog => {
+                const row = document.createElement('tr');
+                const createdDate = new Date(blog.created_at).toLocaleDateString();
+                
+                row.innerHTML = `
+                    <td>${blog.title}</td>
+                    <td>${blog.category || 'General'}</td>
+                    <td>
+                        <span class="status-badge ${blog.published ? 'status-published' : 'status-draft'}">
+                            ${blog.published ? 'Published' : 'Draft'}
+                        </span>
+                    </td>
+                    <td>${createdDate}</td>
+                    <td>
+                        <a href="/blog?id=${blog.id}" class="btn-edit">Edit</a>
+                        <button onclick="deleteBlog('${blog.id}')" class="btn-delete">Delete</button>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Delete blog function
+        async function deleteBlog(blogId) {
+            if (confirm('Are you sure you want to delete this blog post?')) {
+                try {
+                    await fetch(`/api/blogs/${blogId}`, {
+                        method: 'DELETE'
+                    });
+                    loadBlogData(); // Reload the table
+                    loadAnalyticsData(); // Reload analytics
+                } catch (error) {
+                    console.error('Error deleting blog:', error);
+                    alert('Error deleting blog post');
+                }
+            }
+        }
+
+        // Utility function to format numbers
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+    </script>
+</body>
+</html>

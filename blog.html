@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write New Blog - Sacred Stones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-active {
+            color: var(--primary-gold) !important;
+        }
+
+        .nav-active::after {
+            width: 100% !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(45deg, var(--dark-charcoal) 0%, var(--rich-maroon) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0;
+        }
+
+        /* Form Styles */
+        .editor-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            color: var(--rich-maroon);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--shadow-color);
+            background: white;
+        }
+
+        .form-input.large {
+            font-size: 1.2rem;
+            padding: 18px 20px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--shadow-color);
+            background: white;
+        }
+
+        .form-textarea {
+            min-height: 300px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        /* Button Styles */
+        .editor-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: inherit;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.5);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .editor-form {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+
+            .editor-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--secondary-saffron), var(--deep-orange));
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Sacred Stones</a>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#" class="nav-active">Write Blog</a></li>
+                        <li><a href="/architecture">Architecture</a></li>
+                        <li><a href="/sculpture">Sculptures</a></li>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Write New Blog Post</h1>
+            <p class="page-subtitle">Share your insights on Indian temple architecture and sculptures</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <form class="editor-form" id="blogForm">
+                <input type="hidden" id="blogId">
+
+                <div class="form-group">
+                    <label class="form-label" for="blogTitle">Title</label>
+                    <input type="text" class="form-input large" id="blogTitle" required placeholder="Enter your blog post title..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogSubtitle">Subtitle</label>
+                    <input type="text" class="form-input" id="blogSubtitle" placeholder="Optional subtitle for your post..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogCategory">Category</label>
+                    <select class="form-select" id="blogCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="architecture">Temple Architecture</option>
+                        <option value="sculptures">Temple Sculptures</option>
+                        <option value="history">Historical Context</option>
+                        <option value="iconography">Religious Iconography</option>
+                        <option value="techniques">Art Techniques</option>
+                        <option value="conservation">Conservation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogTags">Tags (comma separated)</label>
+                    <input type="text" class="form-input" id="blogTags" placeholder="e.g. Chola, Stone, Dravidian, Bronze, Sacred Geometry..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogContent">Content</label>
+                    <textarea class="form-input form-textarea" id="blogContent" required placeholder="Write your blog post content here...&#10;&#10;You can include:&#10;- Historical background&#10;- Architectural details&#10;- Artistic analysis&#10;- Cultural significance&#10;- Personal insights"></textarea>
+                </div>
+
+                <div class="editor-actions">
+                    <button type="button" class="btn btn-secondary" onclick="saveDraft()">💾 Save Draft</button>
+                    <button type="button" class="btn btn-success" onclick="publishPost()">🚀 Publish</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const blogId = new URLSearchParams(window.location.search).get('id');
+        if (blogId) {
+            fetch(`/api/blogs/${blogId}`)
+                .then(res => res.json())
+                .then(blog => {
+                    document.getElementById('blogId').value = blogId;
+                    document.getElementById('blogTitle').value = blog.title;
+                    document.getElementById('blogSubtitle').value = blog.subtitle;
+                    document.getElementById('blogCategory').value = blog.category;
+                    document.getElementById('blogTags').value = blog.tags.join(', ');
+                    document.getElementById('blogContent').value = blog.content;
+                });
+        }
+
+        async function saveDraft() {
+            await saveBlog(false);
+            alert("Draft saved ✅");
+        }
+
+        async function publishPost() {
+            await saveBlog(true);
+            alert("Blog published 🎉");
+        }
+
+        async function saveBlog(published) {
+            const data = {
+                id: document.getElementById('blogId').value,
+                title: document.getElementById('blogTitle').value,
+                subtitle: document.getElementById('blogSubtitle').value,
+                content: document.getElementById('blogContent').value,
+                category: document.getElementById('blogCategory').value,
+                tags: document.getElementById('blogTags').value.split(',').map(t => t.trim()).filter(t => t),
+                published: published
+            };
+
+            await fetch('/api/blogs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        }
+    </script>
+</body>
+</html>

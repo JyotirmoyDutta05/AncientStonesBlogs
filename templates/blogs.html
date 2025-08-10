@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Ancient Indian Heritage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="temple" patternUnits="userSpaceOnUse" width="20" height="20"><path d="M10 2L18 10L10 18L2 10z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23temple)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(45deg, var(--dark-charcoal) 0%, var(--rich-maroon) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-gold);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(45deg, var(--warm-beige), var(--soft-gray));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-charcoal);
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-charcoal);
+            line-height: 1.3;
+        }
+
+        .blog-subtitle {
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .blog-excerpt {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .blog-tag {
+            background: var(--soft-gray);
+            color: var(--dark-charcoal);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            color: var(--dark-charcoal);
+        }
+
+        .filter-select {
+            padding: 8px 15px;
+            border: 2px solid var(--soft-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: var(--dark-charcoal);
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 8px 15px;
+            border: 2px solid var(--soft-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark-charcoal);
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--dark-charcoal);
+        }
+
+        .spinner {
+            border: 4px solid var(--soft-gray);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+
+            .filters {
+                padding: 25px;
+                margin-bottom: 30px;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .filter-group > div {
+                width: 100%;
+            }
+
+            .filter-label {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .filter-select {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .search-box {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .search-input {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .blog-card {
+                margin-bottom: 20px;
+            }
+
+            .blog-content {
+                padding: 20px;
+            }
+
+            .blog-title {
+                font-size: 1.3rem;
+            }
+
+            .blog-excerpt {
+                font-size: 0.95rem;
+            }
+
+            .blog-meta {
+                font-size: 0.85rem;
+            }
+
+            .read-more {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .no-blogs-message {
+                padding: 60px 30px;
+            }
+
+            .om-symbol-large {
+                font-size: 3rem;
+            }
+
+            .no-blogs-message h2 {
+                font-size: 2rem;
+            }
+
+            .no-blogs-message p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .filters {
+                padding: 20px;
+            }
+
+            .filter-group {
+                gap: 15px;
+            }
+
+            .filter-label {
+                font-size: 0.95rem;
+            }
+
+            .filter-select {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .search-input {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .blog-content {
+                padding: 15px;
+            }
+
+            .blog-title {
+                font-size: 1.2rem;
+            }
+
+            .blog-excerpt {
+                font-size: 0.9rem;
+            }
+
+            .blog-meta {
+                font-size: 0.8rem;
+            }
+
+            .read-more {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+
+            .no-blogs-message {
+                padding: 50px 20px;
+            }
+
+            .om-symbol-large {
+                font-size: 2.5rem;
+            }
+
+            .no-blogs-message h2 {
+                font-size: 1.6rem;
+            }
+
+            .no-blogs-message p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Ancient Stones</div>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/architecture">Architecture</a></li>
+                        <li><a href="/sculpture">Sculptures</a></li>
+                        <li><a href="/sciences">Sciences</a></li>
+                        <li><a href="/blogs" class="nav-active">Read Blogs</a></li>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Ancient Indian Heritage Blogs</h1>
+            <p class="page-subtitle">Discover fascinating insights into temple architecture, sculptures, and ancient sciences through our curated collection of blogs</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <div>
+                        <label class="filter-label">Category:</label>
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <optgroup label="Temple Architecture">
+                                <option value="Ancient Temples">Ancient Temples</option>
+                                <option value="Temple Design">Temple Design</option>
+                                <option value="Sacred Geometry">Sacred Geometry</option>
+                                <option value="Temple Construction">Temple Construction</option>
+                                <option value="Temple Restoration">Temple Restoration</option>
+                            </optgroup>
+                            <optgroup label="Sculptures">
+                                <option value="Stone Sculptures">Stone Sculptures</option>
+                                <option value="Bronze Sculptures">Bronze Sculptures</option>
+                                <option value="Wood Carvings">Wood Carvings</option>
+                                <option value="Relief Sculptures">Relief Sculptures</option>
+                                <option value="Iconography">Iconography</option>
+                            </optgroup>
+                            <optgroup label="Ancient Sciences">
+                                <option value="Mathematics & Numbers">Mathematics & Numbers</option>
+                                <option value="Astronomy & Cosmology">Astronomy & Cosmology</option>
+                                <option value="Chemistry & Metallurgy">Chemistry & Metallurgy</option>
+                                <option value="Medicine & Biology">Medicine & Biology</option>
+                                <option value="Physics & Engineering">Physics & Engineering</option>
+                                <option value="Agriculture & Botany">Agriculture & Botany</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="filter-label">Sort by:</label>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="title">Title A-Z</option>
+                        </select>
+                    </div>
+                    <input type="text" class="search-box" id="searchBox" placeholder="Search blogs...">
+                </div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div id="blogGrid" class="blog-grid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading blogs...</p>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <h3>No Blogs Found</h3>
+                <p>We couldn't find any blogs matching your criteria. Try adjusting your filters or check back later.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let allBlogs = [];
+        let filteredBlogs = [];
+
+        // Load blogs on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBlogs();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('categoryFilter').addEventListener('change', filterBlogs);
+            document.getElementById('sortFilter').addEventListener('change', filterBlogs);
+            document.getElementById('searchBox').addEventListener('input', filterBlogs);
+        }
+
+        async function loadBlogs() {
+            try {
+                const response = await fetch('/api/blogs');
+                const blogs = await response.json();
+                
+                // Filter only published blogs
+                allBlogs = blogs.filter(blog => blog.published);
+                filteredBlogs = [...allBlogs];
+                
+                displayBlogs();
+            } catch (error) {
+                console.error('Error loading blogs:', error);
+                document.getElementById('blogGrid').innerHTML = '<div class="empty-state"><h3>Error Loading Blogs</h3><p>Please try again later.</p></div>';
+            }
+        }
+
+        function filterBlogs() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+            const sortBy = document.getElementById('sortFilter').value;
+
+            // Apply filters
+            filteredBlogs = allBlogs.filter(blog => {
+                const matchesCategory = !categoryFilter || blog.category === categoryFilter;
+                const matchesSearch = !searchQuery || 
+                    blog.title.toLowerCase().includes(searchQuery) ||
+                    blog.subtitle.toLowerCase().includes(searchQuery) ||
+                    blog.content.toLowerCase().includes(searchQuery) ||
+                    blog.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            // Apply sorting
+            filteredBlogs.sort((a, b) => {
+                switch(sortBy) {
+                    case 'oldest':
+                        return new Date(a.created_at) - new Date(b.created_at);
+                    case 'title':
+                        return a.title.localeCompare(b.title);
+                    case 'newest':
+                    default:
+                        return new Date(b.created_at) - new Date(a.created_at);
+                }
+            });
+
+            displayBlogs();
+        }
+
+        function displayBlogs() {
+            const blogGrid = document.getElementById('blogGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (filteredBlogs.length === 0) {
+                blogGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            blogGrid.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            blogGrid.innerHTML = filteredBlogs.map(blog => `
+                <div class="blog-card">
+                    <div class="blog-image">
+                        ${blog.images && blog.images.length > 0 ? 
+                            `<img src="/static/images/blogs/${blog.images[0].path.split('/').pop()}" alt="${blog.title}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                            '📚'
+                        }
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">${blog.category}</div>
+                        <h3 class="blog-title">${blog.title}</h3>
+                        ${blog.subtitle ? `<p class="blog-subtitle">${blog.subtitle}</p>` : ''}
+                        <p class="blog-excerpt">${blog.content.substring(0, 150)}${blog.content.length > 150 ? '...' : ''}</p>
+                        
+                        ${blog.tags && blog.tags.length > 0 ? `
+                            <div class="blog-tags">
+                                ${blog.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="blog-meta">
+                            <span>${new Date(blog.created_at).toLocaleDateString()}</span>
+                        </div>
+                        
+                        <button class="read-more-btn" onclick="viewBlog('${blog.id}')">Read More</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewBlog(blogId) {
+            // For now, just show an alert. In a real app, you'd navigate to a full blog view page
+            alert(`Viewing blog: ${blogId}\n\nThis would open a full blog reading page with the complete content and images.`);
+        }
+    </script>
+</body>
+</html>

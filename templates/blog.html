@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write New Blog - Sacred Stones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-saffron: #FF9933;
+            --deep-orange: #FF6B35;
+            --rich-maroon: #800020;
+            --warm-beige: #F5F5DC;
+            --dark-charcoal: #1a1a1a;
+            --soft-gray: #f8f9fa;
+            --shadow-color: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-charcoal);
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f0f0f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rich-maroon) 0%, var(--deep-orange) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-active {
+            color: var(--primary-gold) !important;
+        }
+
+        .nav-active::after {
+            width: 100% !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(45deg, var(--dark-charcoal) 0%, var(--rich-maroon) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0;
+        }
+
+        /* Form Styles */
+        .editor-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            color: var(--rich-maroon);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--shadow-color);
+            background: white;
+        }
+
+        .form-input.large {
+            font-size: 1.2rem;
+            padding: 18px 20px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--shadow-color);
+            background: white;
+        }
+
+        .form-textarea {
+            min-height: 300px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        /* Button Styles */
+        .editor-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: inherit;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.5);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .editor-form {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+
+            .editor-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--secondary-saffron), var(--deep-orange));
+        }
+
+        /* Tag Suggestions */
+        .tag-suggestions {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-suggestion {
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-saffron));
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .tag-suggestion:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        /* Image Upload Styles */
+        .image-upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--primary-gold);
+            background: white;
+        }
+
+        .image-upload-area.dragover {
+            border-color: var(--primary-gold);
+            background: white;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .upload-placeholder {
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--rich-maroon);
+            margin-bottom: 8px;
+        }
+
+        .upload-subtext {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .image-preview-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .image-preview {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-preview:hover .image-preview-overlay {
+            opacity: 1;
+        }
+
+        .image-preview-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .image-action-btn {
+            background: var(--primary-gold);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .image-action-btn:hover {
+            background: var(--secondary-saffron);
+            transform: translateY(-2px);
+        }
+
+        .image-action-btn.delete {
+            background: #dc3545;
+        }
+
+        .image-action-btn.delete:hover {
+            background: #c82333;
+        }
+
+        .image-caption {
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .image-caption input {
+            width: 100%;
+            border: none;
+            padding: 5px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--dark-charcoal);
+        }
+
+        .image-caption input:focus {
+            outline: none;
+            background: var(--soft-gray);
+            border-radius: 3px;
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 30px 0;
+            }
+
+            .editor-form {
+                gap: 25px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-label {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .form-input, .form-select, .form-textarea {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .form-input.large {
+                font-size: 1.1rem;
+                padding: 15px 18px;
+            }
+
+            .form-textarea {
+                min-height: 200px;
+            }
+
+            .image-upload-area {
+                padding: 30px 20px;
+            }
+
+            .upload-placeholder {
+                font-size: 1rem;
+            }
+
+            .image-preview-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .image-preview {
+                max-width: 100%;
+            }
+
+            .image-preview img {
+                height: 200px;
+            }
+
+            .image-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .image-action-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .tag-suggestions {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .tag-suggestion {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .btn-secondary {
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .form-input, .form-select, .form-textarea {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .form-input.large {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+
+            .form-textarea {
+                min-height: 150px;
+            }
+
+            .image-upload-area {
+                padding: 25px 15px;
+            }
+
+            .upload-placeholder {
+                font-size: 0.9rem;
+            }
+
+            .image-preview img {
+                height: 180px;
+            }
+
+            .tag-suggestions {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 8px;
+            }
+
+            .tag-suggestion {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Sacred Stones</a>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#" class="nav-active">Write Blog</a></li>
+                        <li><a href="/architecture">Architecture</a></li>
+                        <li><a href="/sculpture">Sculptures</a></li>
+                        <li><a href="/sciences">Sciences</a></li>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Write New Blog Post</h1>
+            <p class="page-subtitle">Share your insights on Indian temple architecture and sculptures</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <form class="editor-form" id="blogForm">
+                <input type="hidden" id="blogId">
+
+                <div class="form-group">
+                    <label class="form-label" for="blogTitle">Title</label>
+                    <input type="text" class="form-input large" id="blogTitle" required placeholder="Enter your blog post title..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogSubtitle">Subtitle</label>
+                    <input type="text" class="form-input" id="blogSubtitle" placeholder="Optional subtitle for your post..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogCategory">Category</label>
+                    <select class="form-select" id="blogCategory" required>
+                        <option value="">Select Category</option>
+                        <optgroup label="Temple Architecture">
+                            <option value="dravidian-architecture">Dravidian Architecture</option>
+                            <option value="nagara-architecture">Nagara Architecture</option>
+                            <option value="vesara-architecture">Vesara Architecture</option>
+                            <option value="temple-complexes">Temple Complexes</option>
+                            <option value="gopurams-towers">Gopurams & Towers</option>
+                            <option value="mandapas-halls">Mandapas & Halls</option>
+                            <option value="pillars-columns">Pillars & Columns</option>
+                        </optgroup>
+                        <optgroup label="Temple Sculptures">
+                            <option value="stone-sculptures">Stone Sculptures</option>
+                            <option value="bronze-sculptures">Bronze Sculptures</option>
+                            <option value="deity-sculptures">Deity Sculptures</option>
+                            <option value="narrative-reliefs">Narrative Reliefs</option>
+                            <option value="decorative-carvings">Decorative Carvings</option>
+                            <option value="guardian-figures">Guardian Figures</option>
+                            <option value="animal-sculptures">Animal Sculptures</option>
+                        </optgroup>
+                        <optgroup label="Regional Styles">
+                            <option value="chola-period">Chola Period</option>
+                            <option value="pallava-period">Pallava Period</option>
+                            <option value="hoysala-period">Hoysala Period</option>
+                            <option value="chalukya-period">Chalukya Period</option>
+                            <option value="vijayanagara-period">Vijayanagara Period</option>
+                            <option value="rajput-temples">Rajput Temples</option>
+                            <option value="mughal-influence">Mughal Influence</option>
+                        </optgroup>
+                        <optgroup label="Specialized Topics">
+                            <option value="iconography">Religious Iconography</option>
+                            <option value="sacred-geometry">Sacred Geometry</option>
+                            <option value="temple-rituals">Temple Rituals & Practices</option>
+                            <option value="conservation">Conservation & Restoration</option>
+                            <option value="archaeology">Archaeological Findings</option>
+                            <option value="craftsmanship">Traditional Craftsmanship</option>
+                        </optgroup>
+                        <optgroup label="Ancient Sciences">
+                            <option value="mathematics">Mathematics & Numbers</option>
+                            <option value="astronomy">Astronomy & Cosmology</option>
+                            <option value="chemistry">Chemistry & Metallurgy</option>
+                            <option value="medicine">Medicine & Biology</option>
+                            <option value="physics">Physics & Engineering</option>
+                            <option value="agriculture">Agriculture & Botany</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogTags">Tags (comma separated)</label>
+                    <input type="text" class="form-input" id="blogTags" placeholder="e.g. Chola, Stone, Dravidian, Bronze, Sacred Geometry..." />
+                    <div class="tag-suggestions">
+                        <span class="tag-suggestion" onclick="addTag('Chola')">Chola</span>
+                        <span class="tag-suggestion" onclick="addTag('Pallava')">Pallava</span>
+                        <span class="tag-suggestion" onclick="addTag('Hoysala')">Hoysala</span>
+                        <span class="tag-suggestion" onclick="addTag('Dravidian')">Dravidian</span>
+                        <span class="tag-suggestion" onclick="addTag('Nagara')">Nagara</span>
+                        <span class="tag-suggestion" onclick="addTag('Bronze')">Bronze</span>
+                        <span class="tag-suggestion" onclick="addTag('Stone')">Stone</span>
+                        <span class="tag-suggestion" onclick="addTag('Granite')">Granite</span>
+                        <span class="tag-suggestion" onclick="addTag('Sandstone')">Sandstone</span>
+                        <span class="tag-suggestion" onclick="addTag('Tamil Nadu')">Tamil Nadu</span>
+                        <span class="tag-suggestion" onclick="addTag('Karnataka')">Karnataka</span>
+                        <span class="tag-suggestion" onclick="addTag('Andhra Pradesh')">Andhra Pradesh</span>
+                        <span class="tag-suggestion" onclick="addTag('Rajasthan')">Rajasthan</span>
+                        <span class="tag-suggestion" onclick="addTag('Gujarat')">Gujarat</span>
+                        <span class="tag-suggestion" onclick="addTag('Orissa')">Orissa</span>
+                        <span class="tag-suggestion" onclick="addTag('Zero')">Zero</span>
+                        <span class="tag-suggestion" onclick="addTag('Decimal System')">Decimal System</span>
+                        <span class="tag-suggestion" onclick="addTag('Aryabhata')">Aryabhata</span>
+                        <span class="tag-suggestion" onclick="addTag('Brahmagupta')">Brahmagupta</span>
+                        <span class="tag-suggestion" onclick="addTag('Sushruta')">Sushruta</span>
+                        <span class="tag-suggestion" onclick="addTag('Ayurveda')">Ayurveda</span>
+                        <span class="tag-suggestion" onclick="addTag('Vedic Math')">Vedic Math</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogImages">Featured Images</label>
+                    <div class="image-upload-area" id="imageUploadArea">
+                        <div class="upload-placeholder" onclick="document.getElementById('imageInput').click()">
+                            <div class="upload-icon">📷</div>
+                            <div class="upload-text">Click to upload images or drag & drop</div>
+                            <div class="upload-subtext">Support for JPEG, PNG, WebP (max 5MB each)</div>
+                        </div>
+                        <input type="file" id="imageInput" multiple accept="image/*" style="display: none;" onchange="handleImageUpload(this.files)">
+                        <div class="image-preview-container" id="imagePreviewContainer"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="blogContent">Content</label>
+                    <textarea class="form-input form-textarea" id="blogContent" required placeholder="Write your blog post content here...&#10;&#10;You can include:&#10;- Historical background&#10;- Architectural details&#10;- Artistic analysis&#10;- Cultural significance&#10;- Personal insights"></textarea>
+                </div>
+
+                <div class="editor-actions">
+                    <button type="button" class="btn btn-secondary" onclick="saveDraft()">💾 Save Draft</button>
+                    <button type="button" class="btn btn-success" onclick="publishPost()">🚀 Publish</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let uploadedImages = [];
+        
+        const blogId = new URLSearchParams(window.location.search).get('id');
+        if (blogId) {
+            fetch(`/api/blogs/${blogId}`)
+                .then(res => res.json())
+                .then(blog => {
+                    document.getElementById('blogId').value = blogId;
+                    document.getElementById('blogTitle').value = blog.title;
+                    document.getElementById('blogSubtitle').value = blog.subtitle;
+                    document.getElementById('blogCategory').value = blog.category;
+                    document.getElementById('blogTags').value = blog.tags.join(', ');
+                    document.getElementById('blogContent').value = blog.content;
+                    if (blog.images) {
+                        // Convert saved image paths back to displayable format
+                        uploadedImages = blog.images.map(img => ({
+                            id: img.id,
+                            name: img.name,
+                            caption: img.caption,
+                            data: img.path ? `/${img.path}` : img.data, // Use file path for saved images
+                            path: img.path, // Keep track of saved path
+                            type: img.type
+                        }));
+                        displayImagePreviews();
+                    }
+                });
+        }
+
+        // Drag and drop functionality
+        const imageUploadArea = document.getElementById('imageUploadArea');
+        
+        imageUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.add('dragover');
+        });
+
+        imageUploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.remove('dragover');
+        });
+
+        imageUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleImageUpload(files);
+        });
+
+        // Tag suggestion functionality
+        function addTag(tagName) {
+            const tagsInput = document.getElementById('blogTags');
+            const currentTags = tagsInput.value.trim();
+            
+            if (currentTags === '') {
+                tagsInput.value = tagName;
+            } else {
+                const tagsList = currentTags.split(',').map(t => t.trim());
+                if (!tagsList.includes(tagName)) {
+                    tagsInput.value = currentTags + ', ' + tagName;
+                }
+            }
+            tagsInput.focus();
+        }
+
+        // Image upload handling
+        function handleImageUpload(files) {
+            const maxFileSize = 5 * 1024 * 1024; // 5MB
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+            Array.from(files).forEach(file => {
+                if (!allowedTypes.includes(file.type)) {
+                    alert(`File ${file.name} is not a supported image format.`);
+                    return;
+                }
+
+                if (file.size > maxFileSize) {
+                    alert(`File ${file.name} is too large. Maximum size is 5MB.`);
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageData = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        data: e.target.result,
+                        caption: '',
+                        type: file.type
+                    };
+                    uploadedImages.push(imageData);
+                    displayImagePreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function displayImagePreviews() {
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = '';
+
+            uploadedImages.forEach((image, index) => {
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'image-preview';
+                previewDiv.innerHTML = `
+                    <img src="${image.data}" alt="${image.name}">
+                    <div class="image-preview-overlay">
+                        <div class="image-preview-actions">
+                            <button class="image-action-btn" onclick="setAsFeatured(${index})">
+                                Featured
+                            </button>
+                            <button class="image-action-btn delete" onclick="removeImage(${index})">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                    <div class="image-caption">
+                        <input type="text" placeholder="Add caption..." 
+                               value="${image.caption}"
+                               onchange="updateImageCaption(${index}, this.value)">
+                    </div>
+                `;
+                container.appendChild(previewDiv);
+            });
+
+            // Hide upload placeholder if images exist
+            const placeholder = document.querySelector('.upload-placeholder');
+            if (uploadedImages.length > 0) {
+                placeholder.style.display = 'none';
+            } else {
+                placeholder.style.display = 'block';
+            }
+        }
+
+        function updateImageCaption(index, caption) {
+            uploadedImages[index].caption = caption;
+        }
+
+        function setAsFeatured(index) {
+            // Move the selected image to the beginning
+            const image = uploadedImages.splice(index, 1)[0];
+            uploadedImages.unshift(image);
+            displayImagePreviews();
+            alert('Image set as featured! ⭐');
+        }
+
+        function removeImage(index) {
+            if (confirm('Are you sure you want to remove this image?')) {
+                uploadedImages.splice(index, 1);
+                displayImagePreviews();
+            }
+        }
+
+        async function saveDraft() {
+            await saveBlog(false);
+            alert("Draft saved ✅");
+        }
+
+        async function publishPost() {
+            await saveBlog(true);
+            alert("Blog published 🎉");
+        }
+
+        async function saveBlog(published) {
+            // Prepare images for saving - include both new uploads and existing saved images
+            const imagesToSave = uploadedImages.map(img => {
+                if (img.path) {
+                    // Already saved image, send metadata only
+                    return {
+                        id: img.id,
+                        name: img.name,
+                        caption: img.caption,
+                        path: img.path,
+                        type: img.type
+                    };
+                } else {
+                    // New image with base64 data
+                    return {
+                        id: img.id,
+                        name: img.name,
+                        caption: img.caption,
+                        data: img.data,
+                        type: img.type
+                    };
+                }
+            });
+
+            const data = {
+                id: document.getElementById('blogId').value,
+                title: document.getElementById('blogTitle').value,
+                subtitle: document.getElementById('blogSubtitle').value,
+                content: document.getElementById('blogContent').value,
+                category: document.getElementById('blogCategory').value,
+                tags: document.getElementById('blogTags').value.split(',').map(t => t.trim()).filter(t => t),
+                images: imagesToSave,
+                published: published
+            };
+
+            try {
+                const response = await fetch('/api/blogs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        document.getElementById('blogId').value = result.id;
+                    }
+                } else {
+                    alert('Error saving blog post. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error saving blog post. Please check your connection.');
+            }
+        }
+    </script>
+</body>
+</html>
