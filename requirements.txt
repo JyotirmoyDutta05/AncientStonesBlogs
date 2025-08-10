@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Flask==2.3.3
 Werkzeug==2.3.7
-=======
-flask
 flask-cors
 gunicorn
->>>>>>> ddbf2b4c5bb5e214c11a80fe2f6745865f784fe8
