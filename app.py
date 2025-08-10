@@ -1,4 +1,4 @@
-# app.py - Flask Backend for Blog Website
+# app.py - Flask Backend for Blog Website (Vercel Compatible)
 from flask import Flask, request, jsonify, render_template, send_from_directory
 import os, json, uuid, base64
 from datetime import datetime, timedelta
@@ -7,9 +7,18 @@ from collections import defaultdict
 
 app = Flask(__name__)
 
+# Vercel-compatible paths - use /tmp for temporary storage
+BLOG_DIR = "/tmp/blogs" if os.environ.get('VERCEL') else "blogs"
+IMAGES_DIR = "/tmp/static/images/blogs" if os.environ.get('VERCEL') else "static/images/blogs"
+DB_PATH = "/tmp/analytics.db" if os.environ.get('VERCEL') else "analytics.db"
+
 # Analytics Database Setup
 def init_analytics_db():
-    conn = sqlite3.connect('analytics.db')
+    # Ensure directories exist
+    os.makedirs(BLOG_DIR, exist_ok=True)
+    os.makedirs(IMAGES_DIR, exist_ok=True)
+    
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Page views table
@@ -63,7 +72,7 @@ def track_page_view():
         user_agent = request.headers.get('User-Agent', '')
         session_id = request.cookies.get('session_id', str(uuid.uuid4()))
         
-        conn = sqlite3.connect('analytics.db')
+        conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO page_views (page_name, visitor_ip, user_agent, session_id)
@@ -103,7 +112,7 @@ def view_blogs():
 # Analytics API Endpoints
 @app.route("/api/analytics/overview")
 def get_analytics_overview():
-    conn = sqlite3.connect('analytics.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Total page views (last 30 days)
@@ -144,7 +153,7 @@ def get_analytics_overview():
 
 @app.route("/api/analytics/page/<page_name>")
 def get_page_analytics(page_name):
-    conn = sqlite3.connect('analytics.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Page views for specific page
@@ -171,7 +180,7 @@ def get_page_analytics(page_name):
 
 @app.route("/api/analytics/categories")
 def get_category_analytics():
-    conn = sqlite3.connect('analytics.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Get category stats
@@ -192,7 +201,7 @@ def get_category_analytics():
 
 @app.route("/api/analytics/realtime")
 def get_realtime_stats():
-    conn = sqlite3.connect('analytics.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Current online users (last 5 minutes)
@@ -223,13 +232,6 @@ def get_realtime_stats():
         'today_views': today_views,
         'week_views': week_views
     })
-
-BLOG_DIR = "blogs"
-IMAGES_DIR = "static/images/blogs"
-if not os.path.exists(BLOG_DIR):
-    os.makedirs(BLOG_DIR)
-if not os.path.exists(IMAGES_DIR):
-    os.makedirs(IMAGES_DIR)
 
 # Utility function to save base64 images to files
 def save_image_from_base64(image_data, blog_id):
@@ -276,13 +278,18 @@ def serve_blog_image(filename):
 @app.route("/api/blogs")
 def get_blogs():
     blogs = []
-    for filename in os.listdir(BLOG_DIR):
-        if filename.endswith(".json"):
-            with open(os.path.join(BLOG_DIR, filename)) as f:
-                blog = json.load(f)
-                blog['id'] = filename.replace(".json", "")
-                blogs.append(blog)
-    blogs.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+    try:
+        for filename in os.listdir(BLOG_DIR):
+            if filename.endswith(".json"):
+                with open(os.path.join(BLOG_DIR, filename)) as f:
+                    blog = json.load(f)
+                    blog['id'] = filename.replace(".json", "")
+                    blogs.append(blog)
+        blogs.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+    except Exception as e:
+        print(f"Error loading blogs: {e}")
+        # Return empty list if directory doesn't exist or other errors
+        pass
     return jsonify(blogs)
 
 # Util: Get Single Blog
@@ -299,6 +306,7 @@ def get_blog(blog_id):
 def save_blog():
     data = request.json
     blog_id = data.get("id") or str(uuid.uuid4())
+    
     # Process images - convert base64 to file paths
     processed_images = []
     for image in data.get("images", []):
@@ -334,7 +342,7 @@ def save_blog():
         json.dump(blog_data, f, indent=2)
     
     # Update analytics database
-    conn = sqlite3.connect('analytics.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     # Insert or update blog post
@@ -368,7 +376,7 @@ def delete_blog(blog_id):
         os.remove(path)
         
         # Update analytics database
-        conn = sqlite3.connect('analytics.db')
+        conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         
         # Get category before deleting
@@ -392,6 +400,9 @@ def delete_blog(blog_id):
         
         return jsonify({"success": True})
     return jsonify({"error": "Not found"}), 404
+
+# Vercel requires this for serverless deployment
+app.debug = False
 
 if __name__ == "__main__":
     app.run(debug=True)
